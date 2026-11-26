@@ -24,7 +24,14 @@ html,body{margin:0;height:100%;background:var(--paper)}
 body{color:var(--ink);font:400 15px/1.75 var(--hei);-webkit-text-size-adjust:100%;font-kerning:normal}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;border-radius:0}
 ::selection{background:var(--hand);color:var(--ink)}
-:focus-visible{outline:2px solid var(--hand);outline-offset:2px}
+/* 焦點：鍵盤或輔助工具操作時一定看得見。人碰到的地方用橘色 */
+:focus-visible{outline:3px solid var(--hand);outline-offset:3px}
+.hicon:focus-visible,.menu button:focus-visible,.card:focus-visible,.qs button:focus-visible,.picker .pick:focus-visible,.sheet .x:focus-visible,.cam .top button:focus-visible,.zooms button:focus-visible,.field button:focus-visible,.recbar .go:focus-visible{outline-offset:-3px}
+#camBtn:focus-visible,.sq.live:focus-visible,.recbar .go:focus-visible{outline-color:var(--ink);outline-offset:3px}
+.cam :focus-visible,.work :focus-visible,#splash:focus-visible{outline-color:var(--on-black)}
+.shutter:focus-visible{outline:3px solid var(--on-black);outline-offset:4px}
+.zooms button.on:focus-visible{outline-color:var(--hand)}
+.field textarea:focus-visible{outline:none}
 img{max-width:100%;filter:grayscale(1) contrast(1.35) brightness(1.05)}
 /* 網點：疊在作品照片上的報紙網屏 */
 .card::after,.work::after{content:"";position:absolute;pointer-events:none;z-index:1;mix-blend-mode:screen;opacity:.38;
@@ -80,7 +87,7 @@ header h1{flex:1;align-self:center;margin:0;padding:14px 0;font:600 22px/1.15 va
 
 /* ---------- 對話紀錄 ---------- */
 #log{position:relative;z-index:1;flex:1;overflow-y:auto;padding-top:26px;padding-bottom:18px;overscroll-behavior:contain}
-.item{margin-bottom:30px}
+.item{margin-bottom:40px}
 .meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;color:var(--ink-2)}
 .meta b{font-weight:600;color:var(--ink)}
 .bot .meta::after{content:"";flex:1;height:1px;background:var(--rule-soft)}
@@ -153,8 +160,8 @@ footer{position:relative;z-index:2;padding-top:10px;padding-bottom:calc(10px + e
 .work img{display:block;width:100%;aspect-ratio:4/3;max-height:46vh;object-fit:cover}
 .work{position:relative}
 .work::after{left:0;top:env(safe-area-inset-top);width:100%;aspect-ratio:4/3;max-height:46vh}
-.work>div{padding:20px var(--pad) 4px}
-.work h2{margin:0 0 18px;font:600 30px/1.25 var(--hei);letter-spacing:.01em;text-wrap:balance}
+.work>div{padding:28px var(--pad) 8px}
+.work h2{margin:0 0 28px;font:600 40px/1.2 var(--hei);letter-spacing:.01em;text-wrap:balance}
 .work .f{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule-dark)}
 .work .f>div{padding:10px 12px 12px 0;border-bottom:1px solid var(--rule-dark);font:400 14px/1.5 var(--hei);color:var(--on-black);min-width:0}
 .work .f>div:nth-child(even){padding-left:12px;border-left:1px solid var(--rule-dark)}
@@ -164,8 +171,8 @@ footer{position:relative;z-index:2;padding-top:10px;padding-bottom:calc(10px + e
 .work .f .y::before{content:"Year　年份"}
 .work .f .m::before{content:"Medium　媒材"}
 .work .f .s::before{content:"Size　尺寸"}
-.desc{margin:0;padding:28px 0 30px;font:400 16px/1.95 var(--hei);color:var(--ink)}
-.desc::before{content:"01　作品說明";display:block;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--rule);color:var(--ink)}
+.desc{margin:0;padding:44px 0 48px;font:400 16px/1.95 var(--hei);color:var(--ink)}
+.desc::before{content:"01　作品說明";display:block;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--rule);color:var(--ink)}
 .desc:empty{display:none}
 /* 辨識中 */
 .finding{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;min-height:70vh;padding-top:calc(60px + env(safe-area-inset-top))}
