@@ -42,7 +42,7 @@ const VOICE_MAP = new Map(VOICE.map(([id, t]) => [normText(t), VOICE_DIR + (id.i
 primeVoice = function(){};
 speak = function(text, audioUrl){
   stopSpeak(); if(!text && !audioUrl) return;
-  let queue = audioUrl ? [audioUrl] : [];
+  let queue = audioUrl ? [].concat(audioUrl) : [];   // audio 可以是一個檔或依序播放的多個檔
   if(!queue.length){
     const whole = VOICE_MAP.get(normText(text));
     queue = whole ? [whole] : String(text).split("\n").map(t => VOICE_MAP.get(normText(t))).filter(Boolean);
