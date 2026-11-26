@@ -297,11 +297,6 @@ body,.app,button,textarea,input{font-family:"Chiron Sung HK","Noto Serif TC","No
 .meta,.livehead .lab,.talk .evcount,.card .a,.work .f,.zlab,.polaroid p,.evbar,.recbar .lab{font-family:"Chiron Sung HK","Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",serif}
 .bot .txt,.talk p,.desc{font-weight:400}
 
-/* Netlify 免費方案會在右下角放「Powered by Netlify」標籤（約 56px 高），
-   輸入列往上移，留出底部空間，避免標籤蓋住送出按鈕 */
-footer{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
-.sheet footer{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
-.cam .ctrl{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
 
 /* ===== 網點拼貼：黑白、報紙網點、剪貼貼紙的白邊、粗黑圓角框 ===== */
 :root{--bg:#d8d8d4;--fg:#111;--acc:#111;--cd:#f4f4f1;--nb:#d8d8d4;--nf:#111;--warm:#111;--grain:.16;--cam-bg:#d8d8d4;--cam-fg:#111;--cam-acc:#111}
@@ -541,8 +536,8 @@ header h1,.work h2,.card .t,.picker .lead,.talk .evcount,#splash .sp-t{font-weig
    faq       跟作品無關的常見問題
    ============================================================ */
 const DATA = {
-  venue: "角落三十六度七",
-  welcome: "歡迎來到清大27級畢業展，這次展覽的主題是「角落三十六度七」。我們借用恆溫的概念，象徵創作如同生命般，需要持續投入時間與情感以不斷累積、延續，正如人體透過恆溫維持生命，創作者也透過創作保存自身的記憶、情感，以及對世界的感知。創作者們帶著自己的36.7°C來到這裡，等待每位走入展場的人，在某個不經意的瞬間，與其中一份溫度相遇。每一個帶著溫度的角落，既是棲身之所，也是殊異的觀看位置。\n\n有任何問題都可以提出，可以直接拍攝作品。",
+  venue: "角落三點一四度",
+  welcome: "歡迎來到清大27級畢業展，這次展覽的主題是「角落三點一四度」。我們借用白圓的概念，象徵創作如同生命般，需要持續投入時間與情感以不斷累積、延續，正如白圓透過純粹的白維持生命，創作者透過創作保存自身的記憶、情感，以及對世界的感知。創作者們帶著自己的3.14º來到這裡，等待每位走入展場的人，在某個不經意的瞬間，與其中一個圓相遇。每一個帶著角度的角落，既是棲身之所，也是殊異的觀看位置。\n\n有任何問題都可以提出，可以直接拍攝作品。",
   noAnswer: "這個問題我沒有準備到答案。你可以問問現場的工作人員，或者從這幾個問題開始：",
 
   /* 白牆導覽：拍到「event: true」的作品時觸發
@@ -621,7 +616,7 @@ const DATA = {
       id: "wu",
       title: "《新遺址 系列》",
       artist: "吳銘哲",
-      year: "2026", medium: "", size: "",
+      year: "2026", medium: "影像、微噴輸出、出土物件", size: "依場地而定",
       image: "works/wu_cover.jpg",   // 暫時的佔位圖，拿到作品照片後換掉
       refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/wu_1.jpg", "works/wu_2.jpg"]
       audio: "",
@@ -662,27 +657,39 @@ const DATA = {
       refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/xie_1.jpg", "works/xie_2.jpg"]
       audio: "",
       desc: "（作品說明待補）",
-      talk: "這是謝宏森的作品，詳細的導覽內容還在準備中。",
+      talk: "這是陳佑甄的作品，詳細的導覽內容還在準備中。",
       questions: [],
     },
      {
       id: "xie",
       title: "（作品名待補）",
-      artist: "謝宏森",
+      artist: "潘薇晴",
       year: "2026", medium: "", size: "",
       image: "works/xie_cover.jpg",   // 暫時的佔位圖，拿到作品照片後換掉
       refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/xie_1.jpg", "works/xie_2.jpg"]
       audio: "",
       desc: "（作品說明待補）",
-      talk: "這是謝宏森的作品，詳細的導覽內容還在準備中。",
+      talk: "這是潘薇晴的作品，詳細的導覽內容還在準備中。",
+      questions: [],
+    },
+     {
+      id: "xie",
+      title: "理想狀態",
+      artist: "蘇紹齊",
+      year: "2026", medium: "動力裝置、複合媒材", size: "一場地大小而定",
+      image: "works/xie_cover.jpg",   // 暫時的佔位圖，拿到作品照片後換掉
+      refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/xie_1.jpg", "works/xie_2.jpg"]
+      audio: "",
+      desc: "（作品說明待補）",
+      talk: "這是蘇紹齊的作品，不知道你有沒有這樣的經驗，如果你不做正事一整天，會不會。",
       questions: [],
     },
   ],
 
   faq: [
     { q: "這個導覽怎麼用？", a: "看到想了解的作品，按相機把它拍下來，我會為你介紹。也可以直接打字或按麥克風問我。" },
-    { q: "可以拍照嗎？", a: "【請填寫】展場的拍照規定。" },
-    { q: "展覽到什麼時候？", a: "【請填寫】展期與開放時間。" },
+    { q: "可以拍照嗎？", a: "可以拍攝，但請不要開閃光燈" },
+    { q: "展覽到什麼時候？", a: "展覽從11/27早上9:00~11/27晚上16:00" },
   ],
 };
 
