@@ -445,6 +445,10 @@ header h1,.work h2,.card .t,.picker .lead,.talk .evcount,#splash .sp-t{font-weig
 .zooms button{height:32px}
 .shutter{width:66px;height:66px}
 .shutter i{width:52px;height:52px}
+  /* 手機開深色模式時，維持淺色灰紙版面（避免選單文字變得看不見） */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:light;--paper:var(--bg);--paper2:var(--cd);--ink:var(--fg);--ink2:var(--fg);--muted:var(--fg);--line:var(--fg);--red:var(--acc);--red-soft:var(--cd)}}
+:root[data-theme="dark"]{color-scheme:light;--paper:var(--bg);--paper2:var(--cd);--ink:var(--fg);--ink2:var(--fg);--muted:var(--fg);--line:var(--fg);--red:var(--acc);--red-soft:var(--cd)}
+.menu,.menu button{color:#111}
 </style>
 
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -593,15 +597,15 @@ const DATA = {
     },
     {
       id: "chen",
-      title: "（作品名待補）",
+      title: "日常侵擾",
       artist: "陳品臻",
       year: "2026", medium: "布料、棉花、鐵絲", size: "100*80*200cm",
       image: "works/chen_cover.jpg",   // 暫時的佔位圖，拿到作品照片後換掉
       refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/chen_1.jpg", "works/chen_2.jpg"]
       audio: "",
       desc: "紅色的心臟彷彿長了觸手一般，將藝術家本人身陷的焦慮放大與重現於展場中。",
-      talk: "這是陳品臻的作品，藝術家將自身經驗藉由手工縫製的媒材，將情緒與身體上的不適傳達給所有人，就如同一個空白整潔的圓，希望自己的皮膚是乾淨整潔的，",
-      questions: [],
+      talk: "這是陳品臻2026創作的作品，藝術家將自身經驗藉由手工縫製的媒材，將情緒與身體上的不適表達給所有人，也同時表達如同一個空白整潔的圓，希望自己的皮膚是乾淨整潔的，",
+      questions: [{ q: "所以這些物件可以說是皮膚病的樣貌？", a: "一部分這麼說，但也它本身具備情緒上表達，在面對白色物件上的紅色物品，會不知不覺呈現害怕的狀態" },{ q: "為什麼會是選用布？", a: "我覺得" },{ q: "為什麼是碗盤？", a: "因為創作者在講述自己面對觀看與身體經驗之後，認為白色的圓就像碗盤一樣，具有某種易碎的狀態，並以此對比食安上的問題。" },],
     },
     {
       id: "lin",
@@ -667,14 +671,14 @@ const DATA = {
     },
      {
       id: "x5",
-      title: "（作品名待補）",
+      title: "形體之間   Between Forms",
       artist: "潘薇晴",
-      year: "2026", medium: "", size: "",
+      year: "2026", medium: "檔案攝影 Photographic Archive", size: "依場地而定",
       image: "works/xie_cover.jpg",   // 暫時的佔位圖，拿到作品照片後換掉
       refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/xie_1.jpg", "works/xie_2.jpg"]
       audio: "",
       desc: "本創作以「人體與自然之間共享的生命痕跡」為核心，探討不同生命形式在結構、形態與時間變化中的關聯。透過對自然紋理的觀察，發現植物葉脈、樹皮肌理與土地裂痕，與人體指紋、血管及皮膚皺褶之間，存在著相似的線條與結構。這些來自不同生命形態的表面痕跡，皆記錄著生長、變化與時間累積的過程。作品將觀看焦點由完整形體轉向局部紋理，透過人體與自然影像的擷取、分類與並置，使原本具有不同物質屬性的形體，在視覺結構上產生對照與連結。當外在形態的差異逐漸淡化，生命之間潛藏的共同特徵也隨之浮現。紋理不僅是物體表面的視覺表徵，更是時間作用於生命所留下的痕跡。無論是人體的成長與老化，或自然物的生長、枯萎與風化，皆呈現生命持續變動的狀態。本創作藉由影像的比較與重組，重新審視人體與自然之間的界線，探索不同生命形式在形態與時間經驗上的共通性。",
-      talk: "這是蔡亦晴的作品，詳細的導覽內容還在準備中。",
+      talk: "這是潘薇晴的作品，詳細的導覽內容還在準備中。",
       questions: [],
     },
      {
