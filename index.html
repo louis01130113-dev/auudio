@@ -32,9 +32,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .shutter:focus-visible{outline:3px solid var(--on-black);outline-offset:4px}
 .zooms button.on:focus-visible{outline-color:var(--hand)}
 .field textarea:focus-visible{outline:none}
-img{max-width:100%;filter:grayscale(1) contrast(1.35) brightness(1.05)}
+img{max-width:100%}
 /* 網點：疊在作品照片上的報紙網屏 */
-.card::after,.work::after{content:"";position:absolute;pointer-events:none;z-index:1;mix-blend-mode:screen;opacity:.38;
+.card::after,.work::after{content:"";position:absolute;pointer-events:none;z-index:1;mix-blend-mode:screen;opacity:.18;
  background:radial-gradient(circle,transparent .9px,var(--paper) 2px) 0 0/4px 4px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .pad{padding-left:var(--pad);padding-right:max(16px,env(safe-area-inset-right))}
