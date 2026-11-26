@@ -822,19 +822,15 @@ $("#resetBtn").onclick = () => { if(ctl) ctl.abort(); evStop(); stopSpeak(); clo
 $("#galleryBtn").onclick = () => $("#galIn").click();
 function welcome(){ botItem().t.textContent = DATA.welcome; }
 
-/* ---------- voice out: recorded audio if the work has one, else the phone's voice ---------- */
+/* ---------- voice out: only the artist's recordings; no recording = text only ---------- */
 const player = new Audio();
-function primeVoice(){ try{ if("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch{} }
+function primeVoice(){}
 function setSpk(on){ $("#spk").classList.toggle("on", on); }
 function speak(text, audioUrl){
-  stopSpeak(); if(!text && !audioUrl) return; setSpk(true);
-  if(audioUrl){ player.src = audioUrl; player.onended = player.onerror = () => setSpk(false); player.play().catch(() => setSpk(false)); return; }
-  if(!("speechSynthesis" in window)){ setSpk(false); return; }
-  const u = new SpeechSynthesisUtterance(text); u.lang = "zh-TW"; u.rate = 0.95;
-  const vs = speechSynthesis.getVoices(); const v = vs.find(v => /zh[-_]TW/i.test(v.lang)) || vs.find(v => /^zh/i.test(v.lang)); if(v) u.voice = v;
-  u.onend = u.onerror = () => setSpk(false); speechSynthesis.speak(u);
+  stopSpeak(); if(!audioUrl) return; setSpk(true);
+  player.src = audioUrl; player.onended = player.onerror = () => setSpk(false); player.play().catch(() => setSpk(false));
 }
-function stopSpeak(){ try{ player.pause(); }catch{} if("speechSynthesis" in window) speechSynthesis.cancel(); setSpk(false); }
+function stopSpeak(){ try{ player.pause(); }catch{} setSpk(false); }
 $("#spk").onclick = () => {
   if($("#spk").classList.contains("on")){ stopSpeak(); return; }
   const ps = [...$("#talk").querySelectorAll("p:not(.ask)")];
@@ -1126,7 +1122,7 @@ function evAudio(){
   if(E.audio) return E.audio;
   const a = new Audio(EV.audio[evTrack]); a.preload = "auto";
   a.addEventListener("ended", () => { if(E.playing && !E.tts) evEnd(); });
-  a.addEventListener("error", () => { E.tts = true; $("#c-src").textContent = "語音朗讀（音檔讀不到）"; });
+  a.addEventListener("error", () => { E.tts = true; $("#c-src").textContent = "只顯示文字（音檔讀不到）"; });
   E.audio = a; return a;
 }
 // 第一次觸碰畫面時讓音檔「解鎖」，之後拍到白牆時才能自動出聲
@@ -1186,7 +1182,7 @@ function evBegin(){
 }
 function evSpeakFrom(e){
   if(E.audio) E.audio.pause();
-  (EV.scripts[evTrack] || []).forEach(([t, text]) => { if(t >= e - 1) E.timers.push(setTimeout(() => speak(text), Math.max(0, t - e) * 1000)); });
+  (EV.scripts[evTrack] || []).forEach(([t, text]) => { if(t >= e - 1) E.timers.push(setTimeout(() => evSay(text), Math.max(0, t - e) * 1000)); });
 }
 function evEnd(){
   evStop(true); evSay(EV.endText);
