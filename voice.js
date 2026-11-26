@@ -21,7 +21,7 @@ DATA.event.scripts = {
 // 2. 句子 → 錄音檔對照表
 const VOICE_DIR = "voice/";
 const VOICE = [
-  ["v01", DATA.welcome],
+  ["v01.m4a", DATA.welcome],
   ["v02", DATA.noAnswer],
   ["v03", "這件我沒有認出來，它可能不在今天的導覽裡。你可以站正一點、讓作品填滿畫面再拍一次，或從右上角選單打開作品列表找找看。"],
   ["v04", DATA.event.waitText],
@@ -29,13 +29,14 @@ const VOICE = [
   ["v06", DATA.event.busyText],
   ["v07", DATA.event.endText],
   ["f01", DATA.faq[0].a],
+  ["f02.m4a", DATA.faq[1].a],
   ...DATA.works.flatMap(w => [
     ...(w.talk ? [[w.id + "_talk", w.talk]] : []),
     ...(w.questions || []).map((x, i) => [w.id + "_q" + (i + 1), x.a]),
   ]),
 ];
 const normText = t => (t || "").replace(/\s+/g, "");
-const VOICE_MAP = new Map(VOICE.map(([id, t]) => [normText(t), VOICE_DIR + id + ".mp3"]));
+const VOICE_MAP = new Map(VOICE.map(([id, t]) => [normText(t), VOICE_DIR + (id.includes(".") ? id : id + ".mp3")]));
 
 // 3. 聲音輸出：只播放錄音，不用機器語音
 primeVoice = function(){};

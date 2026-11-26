@@ -11,7 +11,7 @@
 - `index.html`：整個網頁（樣式、程式、內容都在這一個檔案）。內容只需要改 `const DATA = {…}` 區段。
 - `voice.js`：導覽員聲音對照表，在 `index.html` 結尾 `<i class="corner-o">` 前用 `<script src="voice.js"></script>` 載入。會覆寫 `speak()`、`primeVoice()`、`stopSpeak()`、`evSpeakFrom()`，並包住 `evShow()`、`evEnd()`。
 - `audio/A.m4a`、`B.m4a`、`C.m4a`：白牆導覽三軌（A〈圓〉、B〈另一個身分〉、C 不介紹作品，引導觀眾回想看展經驗、觀看身邊的人），藝術家本人錄音。
-- `voice/`：導覽員每句話的錄音。v01 歡迎詞、v02 沒有答案、v03 沒有認出、v04 倒數開始、v05 導覽開始、v06 進行中、v07 結束、f01 怎麼用；同學作品為 `<作品id>_talk.mp3`、`<作品id>_q1.mp3`…
+- `voice/`：導覽員每句話的錄音。v01 歡迎詞、v02 沒有答案、v03 沒有認出、v04 倒數開始、v05 導覽開始、v06 進行中、v07 結束、f01 怎麼用、f02 拍照規定（v01、f02 是 .m4a）；同學作品為 `<作品id>_talk.mp3`、`<作品id>_q1.mp3`…
 - `works/`：作品照片。〈圓〉的辨識照片為 `wall_1.jpg`～`wall_8.jpg`；同學作品目前是 `*_cover.jpg` 佔位圖。
 
 ## 不能違反的作品要求
