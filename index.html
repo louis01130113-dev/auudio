@@ -48,12 +48,18 @@ img{max-width:100%;filter:grayscale(1) contrast(1.35) brightness(1.05)}
 /* 紙張顆粒 */
 .app::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.07;mix-blend-mode:multiply;
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-/* 網點圖形：用模糊點陣 + 高對比做出大小漸變的網點 */
-.ht{position:absolute;pointer-events:none;z-index:0;mix-blend-mode:multiply;filter:contrast(28) grayscale(1);opacity:.2;
- background:radial-gradient(circle,#000 0,#fff 3.6px) 0 0/8px 8px,var(--shape);background-blend-mode:multiply}
-.ht.c1{--shape:radial-gradient(closest-side,#333 0%,#777 45%,#fff 100%);width:330px;height:330px;right:-190px;top:130px;border-radius:50%}
-.ht.c2{--shape:radial-gradient(ellipse 60% 50% at 40% 60%,#444 0%,#999 55%,#fff 100%);width:260px;height:300px;left:-170px;bottom:150px;border-radius:46% 54% 40% 60%/55% 45% 55% 45%;transform:rotate(-14deg)}
-.ht.c3{--shape:linear-gradient(160deg,#000 0%,#999 50%,#fff 90%);width:220px;height:140px;right:-120px;bottom:90px;border-radius:30px;transform:rotate(-8deg)}
+/* 網點圖形：預先算好每個點大小的 SVG（img/ht1～3.svg），手機與電腦畫法一致 */
+.ht{position:absolute;pointer-events:none;z-index:0;opacity:.22;background:center/100% 100% no-repeat}
+.ht.c1{background-image:url("img/ht1.svg");width:330px;height:330px;right:-190px;top:130px}
+.ht.c2{background-image:url("img/ht2.svg");width:260px;height:300px;left:-170px;bottom:150px;transform:rotate(-14deg)}
+.ht.c3{background-image:url("img/ht3.svg");width:220px;height:140px;right:-120px;bottom:90px;transform:rotate(-8deg)}
+/* 手機：縮小、推到邊緣、再淡一點，不壓到文字 */
+@media (max-width:600px){
+ .ht{opacity:.15}
+ .ht.c1{width:240px;height:240px;right:-170px;top:150px}
+ .ht.c2{width:190px;height:220px;left:-140px;bottom:170px}
+ .ht.c3{width:160px;height:102px;right:-100px;bottom:110px}
+}
 
 /* 背景淡字 */
 .drift{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:flex;flex-direction:column;justify-content:space-around;padding:120px 0 120px}
@@ -254,8 +260,8 @@ footer{position:relative;z-index:2;padding-top:10px;padding-bottom:calc(10px + e
 /* ---------- 開啟動畫：黑底、白色的圓、逐字出現 → 往上揭開 ---------- */
 #splash{position:fixed;inset:0;z-index:300;overflow:hidden;cursor:pointer;background:var(--black);color:#fff;animation:sp-out .7s 3.1s cubic-bezier(.7,0,.25,1) forwards}
 @keyframes sp-out{to{transform:translateY(-100%)}}
-#splash .sp-ht{position:absolute;width:118vw;height:118vw;max-width:620px;max-height:620px;right:-46vw;top:54%;border-radius:50%;filter:contrast(28) grayscale(1);
- background:radial-gradient(circle,#000 0,#fff 4px) 0 0/9px 9px,radial-gradient(closest-side,#fff 0%,#fff 34%,#bbb 70%,#777 100%);background-blend-mode:multiply;opacity:0;transform:scale(.6);animation:sp-ht 1.2s .9s var(--ease) forwards}
+#splash .sp-ht{position:absolute;width:118vw;height:118vw;max-width:620px;max-height:620px;right:-46vw;top:54%;border-radius:50%;
+ background:url("img/ht0.svg") center/100% 100% no-repeat,#edede9;opacity:0;transform:scale(.6);animation:sp-ht 1.2s .9s var(--ease) forwards}
 @keyframes sp-ht{to{opacity:1;transform:scale(1)}}
 #splash .sp-t{position:absolute;left:var(--pad);right:var(--pad);top:20%;font:600 clamp(44px,13vw,64px)/1.12 var(--hei);letter-spacing:.01em}
 #splash .sp-t div{white-space:nowrap}
