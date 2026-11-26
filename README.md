@@ -4,7 +4,7 @@
 
 ```
 index.html
-audio/A.mp3  audio/B.mp3  audio/C.mp3
+audio/A.m4a  audio/B.m4a  audio/C.m4a
 works/*.jpg
 ```
 
@@ -25,4 +25,4 @@ works/*.jpg
 - `event.cycle`：每幾秒開一場，目前 120。
 - `event.scripts`：語音朗讀備用模式的文稿與秒數。換新音軌後一起更新。
 - 白牆的參考照片 `works/wall_a.jpg`、`works/wall_b.jpg` 目前是示意圖，請換成在展場實拍的白牆照片（不同角度、距離 4～8 張），並把檔名寫進 `refs`。
-- 換新音軌時，直接用同樣的檔名覆蓋 `audio/A.mp3`、`audio/B.mp3`、`audio/C.mp3`。
+- 換新音軌時，直接用同樣的檔名覆蓋 `audio/A.m4a`、`audio/B.m4a`、`audio/C.m4a`。
