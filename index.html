@@ -365,10 +365,13 @@ img{filter:grayscale(1) contrast(1.35) brightness(1.05)}
 /* 背景跑動的淡文字：五行，交錯往左右慢慢移動 */
 .drift{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:flex;flex-direction:column;justify-content:space-around;padding:70px 0 110px}
 .drift p{margin:0;white-space:nowrap;font:900 44px/1 "Chiron Sung HK","Noto Serif TC","Noto Serif CJK TC",serif;color:rgba(17,17,17,.07);letter-spacing:.08em;width:max-content;animation:run 60s linear infinite}
-.drift p:nth-child(even){animation-direction:reverse;animation-duration:75s;font-size:24px;letter-spacing:.2em;color:rgba(17,17,17,.09)}
+.drift p:nth-child(even){animation-direction:reverse;animation-duration:75s;font-size:24px;letter-spacing:.2em;color:rgba(17,17,17,.045)}
 .drift p:nth-child(3){animation-duration:90s;font-size:64px;color:rgba(17,17,17,.05)}
 @keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.drift p{animation:none}}
+.drift p:nth-child(2),.drift p:nth-child(4){display:none}
+.drift p{animation-duration:120s}
+.drift p:nth-child(3){animation-duration:180s}
 
 /* 加回 36.7 的橘色：只用在「人」的地方 */
 .me .meta,.me .meta b{color:#ff6b0c}
@@ -682,6 +685,18 @@ const DATA = {
       audio: "",
       desc: "（作品說明待補）",
       talk: "這是蘇紹齊的作品，不知道你有沒有這樣的經驗，如果你不做正事一整天，會不會。",
+      questions: [],
+    },
+    {
+      id: "glass",
+      title: "雜草習作",
+      artist: "蔡亦晴",
+      year: "2026", medium: "畫布、布料、壓克力、紗、熱溶膠", size: "依場地而定",
+      image: "works/xie_cover.jpg",   // 暫時的佔位圖，拿到作品照片後換掉
+      refs: [],                          // 辨識用參考照片：在展場實拍 4～8 張後填入，例如 ["works/xie_1.jpg", "works/xie_2.jpg"]
+      audio: "",
+      desc: "（作品說明待補）",
+      talk: "這是潘薇晴的作品，詳細的導覽內容還在準備中。",
       questions: [],
     },
   ],
