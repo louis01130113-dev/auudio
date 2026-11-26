@@ -24,10 +24,10 @@ const VOICE = [
   ["v01.m4a", DATA.welcome],
   ["v02", DATA.noAnswer],
   ["v03", "這件我沒有認出來，它可能不在今天的導覽裡。你可以站正一點、讓作品填滿畫面再拍一次，或從右上角選單打開作品列表找找看。"],
-  ["v04", DATA.event.waitText],
+  ["v04.m4a", DATA.event.waitText],
   ["v05", DATA.event.playText],
   ["v06", DATA.event.busyText],
-  ["v07", DATA.event.endText],
+  ["v07.m4a", DATA.event.endText],
   ["f01", DATA.faq[0].a],
   ["f02.m4a", DATA.faq[1].a],
   ...DATA.works.flatMap(w => [
