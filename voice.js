@@ -32,7 +32,7 @@ const VOICE = [
   ["f02.m4a", DATA.faq[1].a],
   ...DATA.works.flatMap(w => [
     ...(w.talk ? [[w.id + "_talk", w.talk]] : []),
-    ...(w.questions || []).map((x, i) => [w.id + "_q" + (i + 1), x.a]),
+    ...(w.questions || []).map((x, i) => [x.voice || w.id + "_q" + (i + 1), x.a]),   // voice：指定錄音檔名（例如 m4a）
   ]),
 ];
 const normText = t => (t || "").replace(/\s+/g, "");
