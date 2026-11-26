@@ -124,6 +124,11 @@ header h1{flex:1;align-self:center;margin:0;padding:14px 0;font:600 22px/1.15 va
 .card .t{font:600 20px/1.3 var(--hei);margin-bottom:4px}
 .card .a{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .d{margin-top:8px;font:400 13.5px/1.65 var(--hei);color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* 塗黑：黑色網點、邊緣微微暈開，像墨塗掉的文件。字本身透明 */
+.rd{display:inline;word-break:break-all;overflow-wrap:anywhere;color:transparent!important;-webkit-box-decoration-break:clone;box-decoration-break:clone;letter-spacing:.02em;filter:blur(.5px);
+ background:radial-gradient(circle,#111 0 1.4px,transparent 1.9px) 0 0/4px 4px,linear-gradient(transparent 16%,#111 16% 84%,transparent 84%);user-select:none}
+.work .rd{background:radial-gradient(circle,#111 0 1.2px,transparent 1.7px) 0 0/4px 4px,linear-gradient(transparent 16%,#9c9c96 16% 84%,transparent 84%)}
+#talk:has(>p.rd){padding-top:18px}
 .card .chev,.picker .pick .chev{font-size:0;width:30px;height:30px;border:1px solid var(--rule);border-radius:50%;display:grid;place-items:center}
 .card .chev{position:absolute;right:12px;bottom:12px}
 .card .chev::before,.picker .pick .chev::before{content:"";width:12px;height:12px;background:currentColor;
@@ -538,6 +543,34 @@ refs: ["works/wall_1.jpg", "works/wall_2.jpg", "works/wall_3.jpg", "works/wall_4
       talk: "這是蔡亦晴的作品，詳細的導覽內容還在準備中。",
       questions: [],
     },
+    /* 以下兩件：作者不同意出現在作品中，所有文字以黑色網點塗掉。
+       redact: true 的作品，文字欄位只放「■」，不要寫入真實名字或內容。 */
+    {
+      id: "anon1",
+      redact: true,
+      title: "■■■■■",
+      artist: "■■■",
+      year: "■■■■", medium: "■■■■■■■", size: "■■■■■■",
+      image: "img/redact.svg",
+      refs: [],
+      audio: "",
+      desc: "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■",
+      talk: "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■",
+      questions: [],
+    },
+    {
+      id: "anon2",
+      redact: true,
+      title: "■■■",
+      artist: "■■■",
+      year: "■■■■", medium: "■■■■■", size: "■■■■■■■■",
+      image: "img/redact.svg",
+      refs: [],
+      audio: "",
+      desc: "■■■■■■■■■■■■■■■■■■■■■■■■■■■■",
+      talk: "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■",
+      questions: [],
+    },
   ],
 
   faq: [
@@ -697,6 +730,14 @@ function renderWork(d, url){
   a.querySelector(".m").textContent = d.medium || "";
   a.querySelector(".s").textContent = d.size || "";
   a.querySelector(".desc").textContent = d.desc || "";
+  if(d.redact) redactIn(a); else a.querySelectorAll('[aria-label="已遮蔽"]').forEach(n => n.removeAttribute("aria-label"));
+}
+/* 作者不同意出現的作品：把文字包成黑色網點塗黑條 */
+function redactIn(root){
+  root.querySelectorAll("h2,.t,.a,.d,.artist,.y,.m,.s,.desc").forEach(n => {
+    const s = n.textContent; if(!s) return;
+    n.textContent = ""; n.append(el("span", "rd", s)); n.setAttribute("aria-label", "已遮蔽");
+  });
 }
 function talkPara(cls){ const p = el("p", cls); $("#talk").append(p); return p; }
 function renderQs(qs){
@@ -732,7 +773,7 @@ function showWork(w, url, signal){
   $("#live").hidden = false; $("#talk").innerHTML = ""; $("#qs").hidden = true; $("#qbtn").textContent = "推薦問題";
   if(w.event){ renderQs([]); return evShow(); }
   renderQs((w.questions || []).filter(x => x.a));
-  const p = talkPara();
+  const p = talkPara(w.redact ? "rd" : undefined);
   if(autoVoice) speak(w.talk, w.audio);
   return typeOut(p, w.talk || "", signal);
 }
@@ -745,7 +786,7 @@ function showPicker(ids, url, lead){
   ids.map(id => byId[id]).filter(Boolean).forEach(w => {
     const b = el("button", "pick"); b.type = "button";
     const i = new Image(); i.src = w.image || (w.refs || [])[0] || ""; i.alt = "";
-    const t = el("div"); t.append(el("div", "t", w.title), el("div", "a", [w.artist, w.year].filter(Boolean).join("　")));
+    const t = el("div"); t.append(el("div", "t", w.title), el("div", "a", [w.artist, w.year].filter(Boolean).join("　"))); if(w.redact) redactIn(t);
     b.append(i, t, el("span", "chev", "›"));
     b.onclick = () => { remember("user", "觀眾選了〈" + w.title + "〉"); addCard(w, url || w.image); showWork(w, url); $("#sheetScroll").scrollTop = 0; };
     box.append(b);
@@ -788,9 +829,9 @@ function addCard(d, url){
   const it = el("div", "item bot"); it.append(meta(false));
   const c = el("button", "card"); c.type = "button";
   const i = new Image(); i.src = d.image || url; i.alt = "";
-  const ct = el("div", "ct"); ct.append(el("div", "t", d.title || ""), el("div", "a", [d.artist, d.year].filter(Boolean).join("　")), el("div", "d", d.desc || d.talk || ""));
+  const ct = el("div", "ct"); ct.append(el("div", "t", d.title || ""), el("div", "a", [d.artist, d.year].filter(Boolean).join("　")), el("div", "d", d.desc || d.talk || "")); if(d.redact) redactIn(ct);
   c.append(i, ct, el("span", "chev", "›"));
-  c.onclick = () => { if(d.event){ stopSpeak(); openSheet(); showWork(d, url); $("#sheetScroll").scrollTop = 0; return; } stopSpeak(); $("#talk").innerHTML = ""; current = {w:d, d, url}; $("#workArea").innerHTML = ""; renderWork(d, url); $("#live").hidden = false; talkPara().textContent = d.talk || ""; renderQs((d.questions || []).filter(x => x.a)); $("#qs").hidden = true; openSheet(); $("#sheetScroll").scrollTop = 0; };
+  c.onclick = () => { if(d.event){ stopSpeak(); openSheet(); showWork(d, url); $("#sheetScroll").scrollTop = 0; return; } stopSpeak(); $("#talk").innerHTML = ""; current = {w:d, d, url}; $("#workArea").innerHTML = ""; renderWork(d, url); $("#live").hidden = false; talkPara(d.redact ? "rd" : undefined).textContent = d.talk || ""; renderQs((d.questions || []).filter(x => x.a)); $("#qs").hidden = true; openSheet(); $("#sheetScroll").scrollTop = 0; };
   it.append(c); log.append(it); down();
 }
 
